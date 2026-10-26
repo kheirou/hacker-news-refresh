@@ -1,0 +1,34 @@
+[tools]
+node = "24"
+
+[tasks."setup:browsers"]
+description = "Install the Chromium build Playwright drives"
+run = "npx playwright install chromium"
+
+[tasks."check:lint"]
+description = "Lint the extension (manifest, permissions, CSS/JS Firefox can't load)"
+run = "npx web-ext lint --source-dir src --warnings-as-errors"
+
+[tasks."check:e2e"]
+description = "Playwright tests of the content scripts against HN-shaped fixtures"
+run = "npx playwright test"
+
+[tasks."dev:run"]
+description = "Open Firefox with the extension loaded (manual look; HN may load before the add-on, press F5)"
+run = "npx web-ext run --source-dir src --start-url https://news.ycombinator.com/ --no-reload"
+
+[tasks."smoke:firefox"]
+description = "Headless real-Firefox check against live HN (needs network; not part of dev:ci)"
+run = "node scripts/firefox-smoke.js"
+
+[tasks.screenshots]
+description = "Store screenshots (1280x800) from real Firefox against live HN into docs/screenshots/"
+run = "node scripts/screenshots.js"
+
+[tasks.build]
+description = "Zip the extension for AMO into web-ext-artifacts/"
+run = "npx web-ext build --source-dir src --artifacts-dir web-ext-artifacts --overwrite-dest"
+
+[tasks."dev:ci"]
+description = "Merge gate: lint + e2e"
+depends = ["check:lint", "check:e2e"]

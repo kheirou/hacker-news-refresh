@@ -1,0 +1,288 @@
+/* Tokens: themes only swap these. */
+:root {
+  --bg: #fff;
+  --panel: #fff;
+  --text: #1c1c1e;
+  --muted: #6e6e73;
+  --accent: #e8590c;
+  --border: #e5e5ea;
+  --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --size: 16px;
+  --line: 1.4;
+  --width: 1000px;
+}
+
+/* Themes: content.js sets data-hn-theme / data-hn-font on <html>; light is the :root default. */
+:root[data-hn-theme="classic"], .hn-tile[data-theme="classic"] { --bg: #f6f6ef; --panel: #fbfbf4; --text: #000; --muted: #828282; --accent: #ff6600; --border: #e0e0d8; }
+:root[data-hn-theme="slate"], .hn-tile[data-theme="slate"] { --bg: #1e293b; --panel: #2a3850; --text: #e2e8f0; --muted: #94a3b8; --accent: #fb923c; --border: #3b4a63; }
+:root[data-hn-theme="dark"], .hn-tile[data-theme="dark"] { --bg: #1d1d22; --panel: #2a2a31; --text: #e8e8ea; --muted: #8e8e93; --accent: #ff7a2f; --border: #34343c; }
+:root[data-hn-theme="black"], .hn-tile[data-theme="black"] { --bg: #000; --panel: #17171a; --text: #e8e8ea; --muted: #8e8e93; --accent: #ff7a2f; --border: #26262b; }
+.hn-tile[data-theme="light"] { --bg: #fff; --panel: #fff; --text: #1c1c1e; --muted: #6e6e73; --accent: #e8590c; --border: #e5e5ea; }
+:root[data-hn-font="serif"] { --font: Georgia, "Times New Roman", serif; }
+:root[data-hn-font="inter"] { --font: "HN Redesign Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+/* Inter (SIL Open Font Licence, see fonts/OFL.txt): variable weight, Latin and Latin Extended subsets, loaded only when used. */
+@font-face { font-family: "HN Redesign Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "HN Redesign Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* Extension-built elements stay hidden unless the redesign is on (shown inside the nested block below). */
+.hn-header, .hn-heading, .hn-tabs, .hn-newbar, .hn-selbar, .hn-new-badge, .hn-usercard, .hn-pad { display: none; }
+
+/* Everything below is nested under data-hn-on, so turning it off leaves HN's original design (CSS nesting: Firefox 117+).
+   Selector map: the only place that knows HN's markup (checked against news.ycombinator.com, 2026-10).
+   #hnmain page table, #bigbox content row, .athing story/comment row, .titleline title, .subtext/.subline meta,
+   .comtr comment row, .ind indent cell, .commtext comment body, .pagetop header, .yclinks footer. */
+:root[data-hn-on] {
+&[data-hn-justify] .commtext, &[data-hn-justify] .toptext { text-align: justify; }
+&[data-hn-fade] .titleline > a:visited, &[data-hn-fade] .hn-index a:visited { opacity: .55; }
+&[data-hn-hover] .votelinks a { opacity: 0; }
+&[data-hn-hover] .athing:hover .votelinks a { opacity: 1; }
+&[data-hn-fixed] .hn-header { position: sticky; top: 0; }
+&[data-hn-smooth] body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+&[data-hn-bold] .hn-index td.hn-title a, &[data-hn-bold] .titleline > a { font-weight: 600; }
+
+body { background: var(--bg); color: var(--text); font: var(--size)/var(--line) var(--font); margin: 0; padding: 0; }
+
+/* Frame: flat page, full-width header, content column on the left. */
+body > center { text-align: left; } /* HN wraps the page in <center>, which also centres the table */
+#hnmain { width: min(calc(100% - 96px), var(--width)) !important; margin: 0 auto 48px; background: transparent; border: 0; }
+#hnmain > tbody > tr:first-child { display: none; } /* HN's own header (account details are read from it) */
+/* HN has no doctype, so browsers are in quirks mode and reset font size and line height on every <table>, the root #hnmain included. */
+#hnmain, #hnmain table, #hnmain td, .comment, .commtext, .title, .titleline, .subtext, .subline { font: inherit; color: inherit; }
+#hnmain font { font-size: inherit; }
+#hnmain td[bgcolor] { background: var(--border); }
+
+/* #hnmain / .hn-header beat HN's a:link and .c00 a:link rules. */
+#hnmain a:link, #hnmain a:visited { color: inherit; text-decoration: none; }
+#hnmain a:hover { color: var(--accent); }
+#hnmain input, #hnmain textarea { background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; }
+
+/* Header: section tabs on the left, toolbar on the right. */
+.hn-header { position: relative; display: flex; align-items: stretch; box-sizing: border-box; height: 68px; padding: 0; border-bottom: 1px solid var(--border); background: var(--bg); z-index: 20; font: var(--size)/1.2 var(--font); }
+.hn-header a:link, .hn-header a:visited { color: var(--link-color, var(--text)); text-decoration: none; }
+.hn-header a:hover { color: var(--accent); }
+.hn-sections, .hn-toolbar { display: flex; align-items: center; gap: 48px; }
+.hn-toolbar { gap: 12px; margin: 0 24px 0 auto; }
+/* Brand sits at the far left; the tabs line up with the content column (but never closer than 180px, so they clear the brand). */
+.hn-brand { position: absolute; left: 12px; top: 0; bottom: 0; display: flex; align-items: center; gap: 10px; font-weight: 600; white-space: nowrap; }
+.hn-brand .hn-mark { width: 22px; height: 22px; }
+.hn-sections { margin-left: max(180px, calc((100% - min(calc(100% - 96px), var(--width))) / 2)); }
+.hn-tab { font-size: 1.1em; }
+@media (max-width: 1000px) { /* narrow windows: icon-only brand, tighter tabs, so nothing scrolls sideways */
+  .hn-brand-text { display: none; }
+  .hn-sections { gap: 20px; margin-left: 56px; }
+}
+.hn-tab { --link-color: var(--muted); display: flex; align-items: center; height: 100%; box-sizing: border-box; border-bottom: 2px solid transparent; }
+.hn-tab[aria-current] { --link-color: var(--accent); border-bottom-color: var(--accent); }
+.hn-iconbtn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; font: inherit; }
+.hn-iconbtn:hover, .hn-iconbtn[aria-expanded="true"] { background: var(--panel); color: var(--text); }
+.hn-header a.hn-iconbtn:link, .hn-header a.hn-iconbtn:visited { --link-color: var(--muted); }
+.hn-more { width: 28px; height: 28px; }
+.hn-icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hn-pop { position: relative; display: inline-flex; align-items: center; }
+
+/* Dropdown panels (ui.js makePanel). */
+.hn-panel { position: absolute; top: calc(100% + 8px); right: 0; z-index: 30; min-width: 220px; box-sizing: border-box; padding: 12px; background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 32px rgba(0, 0, 0, .28); text-align: left; }
+.hn-panel[hidden] { display: none; }
+.hn-panel.hn-left { right: auto; left: 0; }
+.hn-menu { padding: 8px 0; min-width: 190px; }
+.hn-menu a { display: block; padding: 7px 20px; white-space: nowrap; }
+.hn-menu hr { border: 0; border-top: 1px solid var(--border); margin: 6px 0; }
+.hn-muted { color: var(--muted); font-size: .85em; }
+.hn-panel-title { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .85em; margin-bottom: 6px; }
+.hn-link { border: 0; background: none; color: var(--accent); cursor: pointer; font: inherit; padding: 0; }
+.hn-panel [hidden] { display: none; }
+.hn-history { list-style: none; margin: 0; padding: 0; width: 320px; max-height: 360px; overflow-y: auto; }
+
+/* Settings panel (panels.js): tabs, font cards, sliders, theme swatches, switches. */
+.hn-aa { display: inline-flex; align-items: baseline; gap: 1px; font-size: 20px; line-height: 1; }
+.hn-aa small { font-size: 13px; }
+.hn-iconbtn:focus-visible, .hn-switch input:focus-visible, .hn-tile:focus-visible, .hn-seg button:focus-visible, .hn-chip:focus-visible, .hn-stepbtn:focus-visible, .hn-step input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Settings drawer (panels.js): one scrolling page on the right, below the header. */
+.hn-drawer { position: fixed; top: 68px; right: 0; bottom: 0; z-index: 30; display: flex; flex-direction: column; box-sizing: border-box; width: 360px; max-width: 100vw; background: var(--panel); color: var(--text); border-left: 1px solid var(--border); box-shadow: -10px 0 32px rgba(0, 0, 0, .25); text-align: left; }
+.hn-drawer[hidden] { display: none; }
+.hn-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; border-bottom: 1px solid var(--border); }
+.hn-drawer-head h2 { margin: 0; font-size: 1.1em; font-weight: 600; }
+.hn-drawer-body { overflow-y: auto; padding: 0 20px 28px; }
+.hn-sec { padding: 18px 0 8px; border-bottom: 1px solid var(--border); }
+.hn-sec:last-child { border-bottom: 0; }
+.hn-sec-title { margin: 0 0 12px; color: var(--muted); font-size: .75em; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.hn-sec p { margin: 8px 0; }
+
+/* Theme tiles redraw themselves with their own theme's colours (the theme rules above also match .hn-tile). */
+.hn-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.hn-tile { display: flex; flex-direction: column; overflow: hidden; padding: 0; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--text); cursor: pointer; font: inherit; }
+.hn-tile-sample { padding: 12px 0 8px; border-bottom: 3px solid var(--accent); font-size: 1.4em; line-height: 1.2; text-align: center; }
+.hn-tile-name { padding: 6px 0; color: var(--muted); font-size: .8em; text-align: center; }
+.hn-tile[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--accent); }
+
+/* Segmented control (typeface, show as). */
+.hn-seg { display: inline-flex; box-sizing: border-box; width: 100%; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; }
+.hn-seg button { flex: 1; padding: 9px 0; border: 0; background: transparent; color: var(--muted); cursor: pointer; font: inherit; }
+.hn-seg button + button { border-left: 1px solid var(--border); }
+.hn-seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.hn-seg .hn-font-serif { font-family: Georgia, "Times New Roman", serif; }
+.hn-seg .hn-font-inter { font-family: "HN Redesign Inter", system-ui, sans-serif; }
+
+/* Steppers: label, -, value, +, and the slider underneath. */
+.hn-step { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 6px 8px; margin: 16px 0; color: var(--muted); font-size: .9em; }
+.hn-step input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+.hn-step output { min-width: 5ch; color: var(--text); font-variant-numeric: tabular-nums; text-align: center; }
+.hn-stepbtn { width: 26px; height: 26px; padding: 0; border: 1px solid var(--border); border-radius: 50%; background: transparent; color: var(--text); cursor: pointer; font: inherit; line-height: 1; }
+.hn-stepbtn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Switches with a one-line description. */
+.hn-switch-text { display: flex; flex-direction: column; gap: 2px; }
+.hn-switch-text small { color: var(--muted); font-size: .8em; }
+
+/* View bar under the heading (panels.js viewBar). */
+.hn-viewbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding: 14px 12px 4px; }
+.hn-viewbar[hidden], .hn-viewgroup[hidden] { display: none; }
+.hn-viewgroup { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.hn-viewlabel { margin-right: 4px; color: var(--muted); font-size: .85em; }
+.hn-viewbar .hn-seg { width: auto; }
+.hn-viewbar .hn-seg button { flex: none; padding: 5px 16px; font-size: .9em; }
+.hn-chip { padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font: inherit; font-size: .85em; }
+.hn-chip[aria-pressed="true"] { border-color: var(--accent); background: var(--panel); color: var(--text); }
+.hn-chip:disabled { cursor: default; opacity: .7; }
+
+/* Account card. */
+.hn-account-card { width: 270px; padding: 16px; }
+.hn-account-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.hn-avatar { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 1.2em; font-weight: 600; text-transform: uppercase; }
+.hn-account-links { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.hn-account-links a, .hn-account-out { display: block; padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
+.hn-account-links a:hover { background: var(--bg); }
+.hn-account-out { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--border); border-radius: 0; }
+.hn-switch { display: flex; justify-content: space-between; align-items: center; margin: 12px 0; cursor: pointer; }
+.hn-switch input { appearance: none; position: relative; flex: none; width: 40px; height: 22px; margin: 0; border-radius: 11px; background: var(--border); cursor: pointer; transition: background .15s; }
+.hn-switch input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.hn-switch input:checked { background: var(--accent); }
+.hn-switch input:checked::after { transform: translateX(18px); }
+.hn-warn { margin: -6px 0 14px; color: var(--accent); font-size: .85em; }
+.hn-note { margin-top: 18px; color: var(--muted); font-size: .85em; }
+
+/* View menu (...) */
+
+/* Bookmarks (bookmarks.js): button next to each item, and the toolbar panel. */
+.hn-bm { display: inline-flex; align-items: center; margin-left: 8px; padding: 0; border: 0; background: none; color: var(--muted); cursor: pointer; vertical-align: middle; }
+.hn-bm .hn-icon { width: 15px; height: 15px; }
+.hn-bm[aria-pressed="true"] { color: var(--accent); }
+.hn-bm[aria-pressed="true"] .hn-icon { fill: currentColor; }
+.hn-bm:hover { color: var(--accent); }
+.hn-index tbody tr:not(:hover) .hn-bm[aria-pressed="false"] { opacity: 0; }
+.hn-index .hn-bm:focus-visible { opacity: 1; outline: 2px solid var(--accent); }
+.hn-bookmarks { width: 380px; }
+.hn-actions { display: inline-flex; gap: 14px; }
+.hn-bm-list { max-height: 380px; overflow-y: auto; }
+.hn-header a.hn-muted:link, .hn-header a.hn-muted:visited { --link-color: var(--muted); }
+.hn-bm-group, .hn-subtitle { margin: 12px 0 4px; color: var(--muted); font-size: .8em; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; }
+.hn-bm-list ul { list-style: none; margin: 0; padding: 0; }
+.hn-bm-list li { display: flex; align-items: baseline; gap: 10px; padding: 4px 0; }
+.hn-bm-list li a:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hn-bm-remove { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 1.2em; line-height: 1; padding: 0 4px; }
+.hn-bm-remove:hover { color: var(--accent); }
+
+/* New replies (newreplies.js): badge, marked comments, floating arrows. */
+.hn-new-badge { display: inline; margin-left: 8px; color: var(--accent); font-size: .85em; font-weight: 600; white-space: nowrap; }
+tr.hn-new .default { border-left: 3px solid var(--accent); padding-left: 13px; }
+tr.hn-current .default { background: var(--panel); }
+.hn-newbar { display: flex; align-items: center; gap: 4px; position: fixed; right: 24px; bottom: 24px; z-index: 15; padding: 4px 6px 4px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 6px 20px rgba(0, 0, 0, .25); color: var(--accent); font-weight: 600; }
+.hn-newbar .hn-next .hn-icon { transform: rotate(180deg); }
+.hn-newbar .hn-iconbtn { color: var(--accent); }
+
+/* Selection toolbar (selection.js) */
+.hn-selbar { display: flex; position: absolute; z-index: 40; gap: 2px; padding: 4px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 6px 20px rgba(0, 0, 0, .3); }
+.hn-selbar .hn-iconbtn { width: 34px; height: 34px; border-radius: 8px; }
+.hn-selbar .hn-iconbtn[aria-pressed="true"] { color: var(--accent); }
+.hn-selbar .hn-iconbtn[aria-pressed="true"] .hn-icon { fill: currentColor; }
+#hnmain ~ .hn-selbar a:link, .hn-selbar a:link, .hn-selbar a:visited { color: var(--muted); }
+
+/* User card (userpop.js) */
+.hn-usercard { display: block; position: absolute; z-index: 45; width: 320px; box-sizing: border-box; padding: 14px 16px; background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 32px rgba(0, 0, 0, .3); }
+.hn-usercard p { margin: 4px 0 0; }
+.hn-usercard-head { display: flex; justify-content: space-between; align-items: center; }
+.hn-about { margin-top: 10px; max-height: 160px; overflow-y: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9em; }
+
+/* Control pad and keyboard selection (controls.js) */
+&[data-hn-pad] .hn-pad { display: grid; grid-template-columns: repeat(3, 34px); grid-template-areas: ". up ." "left . right" ". down ."; position: fixed; right: 24px; bottom: 96px; z-index: 15; padding: 6px; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 6px 20px rgba(0, 0, 0, .22); }
+.hn-pad .hn-iconbtn { width: 34px; height: 34px; }
+.hn-pad-up { grid-area: up; }
+.hn-pad-down { grid-area: down; }
+.hn-pad-left { grid-area: left; }
+.hn-pad-right { grid-area: right; }
+.hn-pad-down .hn-icon { transform: rotate(180deg); }
+.hn-pad-left .hn-icon { transform: rotate(-90deg); }
+.hn-pad-right .hn-icon { transform: rotate(90deg); }
+tr.hn-selected { background: var(--panel); box-shadow: inset 3px 0 var(--accent); }
+
+/* Heading tools and date picker (shell.js) */
+.hn-heading-tools { display: flex; align-items: center; gap: 4px; }
+.hn-datepick { display: flex; flex-direction: column; gap: 6px; }
+.hn-datepick input { padding: 6px 8px; font: inherit; color-scheme: light dark; }
+.hn-keys { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: .9em; }
+.hn-keys dt { color: var(--accent); font-variant-numeric: tabular-nums; }
+.hn-keys dd { margin: 0; color: var(--muted); }
+.hn-history li { padding: 5px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Heading above story lists. */
+.hn-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border); }
+.hn-heading h1 { margin: 40px 0 24px; font-size: calc(var(--size) * 2.25); font-weight: 500; line-height: 1.2; }
+.hn-date { margin-left: .6em; font-size: .55em; font-weight: 400; color: var(--muted); }
+.hn-year { margin-left: .6em; font-size: .55em; font-weight: 400; color: var(--muted); opacity: .55; }
+
+/* Table view (index.js builds .hn-index; HN's own story rows stay in the DOM, hidden). */
+&[data-hn-table] tr.athing, &[data-hn-table] tr.athing + tr { display: none; }
+#hnmain .hn-index { width: 100%; border-collapse: collapse; }
+#hnmain .hn-index th { text-align: left; color: var(--muted); font-size: .8em; font-weight: 500; padding: 14px 12px 10px; }
+#hnmain .hn-index td { padding: 4.8px 12px; }
+#hnmain .hn-index tbody tr:hover { background: var(--panel); }
+#hnmain .hn-index td.hn-rank, #hnmain .hn-index td.hn-points, #hnmain .hn-index td.hn-comments { text-align: right; font-variant-numeric: tabular-nums; }
+#hnmain .hn-index td.hn-rank { text-align: left; }
+#hnmain .hn-index th.hn-points, #hnmain .hn-index th.hn-comments { text-align: right; }
+#hnmain .hn-index td.hn-rank { color: var(--muted); }
+#hnmain .hn-index td.hn-points { color: var(--accent); }
+#hnmain .hn-index td.hn-title { position: relative; width: 100%; padding-right: 44px; }
+/* The bookmark button lives at the cell's right edge: inline after the domain it wrapped onto an extra line (and made the row taller) whenever a long title filled the row. */
+#hnmain .hn-index td.hn-title .hn-bm { position: absolute; right: 12px; top: 50%; margin: 0; transform: translateY(-50%); }
+#hnmain .hn-index .hn-site { color: var(--muted); font-size: .85em; }
+#hnmain .hn-index td.hn-by, #hnmain .hn-index td.hn-age, #hnmain .hn-index td.hn-comments { font-size: .9em; white-space: nowrap; }
+#hnmain .hn-index td.hn-by, #hnmain .hn-index td.hn-age { color: var(--muted); }
+
+/* "More": a centred pill under the list. */
+/* Centring needs the table view, where the story rows are hidden and More is the only row. In list view the same rules squeezed the stories into a sliver. */
+&[data-hn-table] tr:has(a.morelink) > td[colspan] { display: none; }
+&[data-hn-table] table:has(> tbody > tr > td.title > a.morelink) { width: 100%; }
+&[data-hn-table] td.title:has(> a.morelink) { width: 100%; text-align: center; padding: 28px 0 8px; }
+#hnmain a.morelink:link, #hnmain a.morelink:visited { display: inline-block; padding: 8px 22px; background: var(--panel); border-radius: 8px; color: var(--text); }
+#hnmain a.morelink:hover { color: var(--accent); }
+
+/* The YC banner under the list: quiet. */
+#hnmain center > a:link, #hnmain center > a:visited { color: var(--muted); }
+
+/* List view (HN's own rows). */
+.athing { border-top: 1px solid var(--border); }
+.athing .title { padding: 10px 0 0; }
+.sitebit, .subtext, .subline, .age a, .comhead, .rank { color: var(--muted); font-size: .85em; }
+.subtext, .subline { padding-bottom: 10px; }
+.score { color: var(--accent); }
+.spacer, .morespace { display: none; }
+
+/* Comments */
+.comtr .default { padding: 10px 16px; }
+.commtext { color: var(--text); }
+.reply a { color: var(--muted); font-size: .85em; text-decoration: none; }
+.reply u { text-decoration: none; }
+#hnmain form.hn-reply { margin: 8px 0 4px; }
+#hnmain form.hn-reply textarea { width: 100%; box-sizing: border-box; padding: 8px; font: inherit; }
+#hnmain form.hn-reply button { margin-top: 6px; padding: 4px 14px; border: 1px solid var(--border); border-radius: 6px; background: var(--accent); color: #fff; font: inherit; cursor: pointer; }
+
+/* Profile tabs (profile.js) */
+#hnmain .hn-tabs { display: flex; gap: 20px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+#hnmain .hn-tabrow { display: none; }
+
+.yclinks, .yclinks a { color: var(--muted); font-size: .85em; }
+}

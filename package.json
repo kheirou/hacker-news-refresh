@@ -1,0 +1,16 @@
+{
+  "name": "hn-redesign",
+  "private": true,
+  "license": "MIT",
+  "description": "Firefox extension that restyles Hacker News. Dev tooling only; the extension lives in src/ and has no build step.",
+  "author": "kheirou",
+  "homepage": "https://github.com/kheirou/hn-redesign#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/kheirou/hn-redesign.git" },
+  "bugs": { "url": "https://github.com/kheirou/hn-redesign/issues" },
+  "keywords": ["firefox-extension", "webextension", "hacker-news", "dark-mode"],
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "selenium-webdriver": "^4.51.0",
+    "web-ext": "^10.8.0"
+  }
+}
