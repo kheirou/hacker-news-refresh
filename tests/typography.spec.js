@@ -46,8 +46,8 @@ test.describe('Inter (bundled, loaded only when chosen)', () => {
     await page.getByRole('button', { name: 'Inter', exact: true }).click()
     await expect(page.locator('html')).toHaveAttribute('data-hn-font', 'inter')
     await expect(page.getByRole('button', { name: 'Inter', exact: true })).toHaveAttribute('aria-pressed', 'true')
-    expect(await css(page, '.hn-index td.hn-title', 'fontFamily')).toContain('HN Redesign Inter')
-    const loaded = await page.evaluate(async () => { await document.fonts.load('16px "HN Redesign Inter"'); return document.fonts.check('16px "HN Redesign Inter"') })
+    expect(await css(page, '.hn-index td.hn-title', 'fontFamily')).toContain('Hacker News Refresh Inter')
+    const loaded = await page.evaluate(async () => { await document.fonts.load('16px "Hacker News Refresh Inter"'); return document.fonts.check('16px "Hacker News Refresh Inter"') })
     expect(loaded).toBe(true)
     expect(fonts).toContain('inter-latin-wght-normal.woff2')
     expect(fonts).not.toContain('inter-latin-ext-wght-normal.woff2') // only fetched for characters outside Latin
@@ -56,7 +56,7 @@ test.describe('Inter (bundled, loaded only when chosen)', () => {
   test('the Inter button previews in Inter and the licence ships with the font', async ({ page }) => {
     await boot(page, '/news')
     await page.getByRole('button', { name: 'Appearance and settings' }).click()
-    expect(await css(page, '.hn-seg .hn-font-inter', 'fontFamily')).toContain('HN Redesign Inter')
+    expect(await css(page, '.hn-seg .hn-font-inter', 'fontFamily')).toContain('Hacker News Refresh Inter')
     const fs = require('node:fs')
     const dir = require('node:path').join(__dirname, '..', 'src', 'fonts')
     expect(fs.readdirSync(dir).sort()).toEqual(['OFL.txt', 'inter-latin-ext-wght-normal.woff2', 'inter-latin-wght-normal.woff2'])

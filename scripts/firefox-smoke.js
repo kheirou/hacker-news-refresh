@@ -81,8 +81,8 @@ async function main() {
     // The bundled Inter must really load from the extension on HN (its page security rules could block it).
     await setStorage({ font: 'inter' })
     await sleep(500)
-    const inter = await driver.executeAsyncScript(done => document.fonts.load('16px "HN Redesign Inter"').then(
-      faces => done({ faces: faces.length, loaded: document.fonts.check('16px "HN Redesign Inter"'), status: faces.map(f => f.status), family: getComputedStyle(document.querySelector('.hn-index td.hn-title')).fontFamily }),
+    const inter = await driver.executeAsyncScript(done => document.fonts.load('16px "Hacker News Refresh Inter"').then(
+      faces => done({ faces: faces.length, loaded: document.fonts.check('16px "Hacker News Refresh Inter"'), status: faces.map(f => f.status), family: getComputedStyle(document.querySelector('.hn-index td.hn-title')).fontFamily }),
       e => done({ error: String(e) })))
     check('bundled Inter loads on HN', inter.loaded === true && inter.faces >= 1 && inter.status?.every(s => s === 'loaded'), JSON.stringify(inter))
     await shot('front-inter')

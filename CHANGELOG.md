@@ -18,5 +18,5 @@ First release.
 - Popup with a master on/off switch; off restores the original HN exactly.
 - Real-Firefox smoke test and Playwright suite.
 
-[Unreleased]: https://github.com/kheirou/hn-redesign/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/kheirou/hn-redesign/releases/tag/v1.0.0
+[Unreleased]: https://github.com/kheirou/hacker-news-refresh/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/kheirou/hacker-news-refresh/releases/tag/v1.0.0

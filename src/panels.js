@@ -28,7 +28,7 @@ const section = (title, ...kids) => h('section', { className: 'hn-sec' }, h('h3'
 const press = (button, on) => button.setAttribute('aria-pressed', String(on))
 
 // A missing font never errors, it silently shows the next one: ask the browser whether Inter really loaded.
-const interLoaded = () => document.fonts.load('16px "HN Redesign Inter"').then(faces => faces.length > 0 && faces.every(f => f.status === 'loaded'), () => false)
+const interLoaded = () => document.fonts.load('16px "Hacker News Refresh Inter"').then(faces => faces.length > 0 && faces.every(f => f.status === 'loaded'), () => false)
 
 // Text size / line spacing / page width: a slider with its value and -/+ buttons for exact steps.
 function stepper(key, label, [min, max, step], format) {
@@ -93,7 +93,7 @@ function aboutSection() {
   const original = h('button', { type: 'button', className: 'hn-link' }, 'Use the original design')
   original.addEventListener('click', () => save({ on: false }))
   const el = section('About',
-    h('p', {}, 'HN Redesign ', h('strong', {}, browser.runtime.getManifest().version)),
+    h('p', {}, 'Hacker News Refresh ', h('strong', {}, browser.runtime.getManifest().version)),
     h('p', { className: 'hn-muted' }, 'A cleaner, themeable Hacker News. Settings, history and bookmarks stay in this browser. The only requests go to Hacker News itself: replies, and a profile lookup when you hover a username.'),
     h('p', { className: 'hn-muted' }, 'Not endorsed by, affiliated with, or sponsored by Y Combinator.'),
     h('h4', { className: 'hn-subtitle' }, 'Keyboard shortcuts'),

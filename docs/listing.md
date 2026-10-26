@@ -3,7 +3,7 @@
 Original work. Own code, icons, wording and name; no third-party assets, branding or payment code. Not affiliated with Y Combinator.
 
 ## Name
-HN Redesign
+Hacker News Refresh
 
 ## Summary (max 250 chars)
 Reads Hacker News like a modern site: tidy header with tabs, a score table, five colour themes, bookmarks, new-comment badges, keyboard shortcuts and a one-click way back to the original page. Free, no account, nothing leaves your browser.
@@ -56,7 +56,7 @@ Manifest: `data_collection_permissions: none`.
 - Test: install, open https://news.ycombinator.com/. Aa button: the settings drawer (colour, text, page, reading, about). The bar under the heading: table or list, columns, bold titles. Bookmark icons appear on row hover. Open any story page: comments get bookmark icons; select a comment's text for the toolbar; hover a username for the card; press j / k. The toolbar button has the on/off switch.
 - Inline reply and the account menu need a logged-in HN account; logged out they fall back to HN's own pages.
 - CSS uses nesting (hence strict_min_version 142, which `data_collection_permissions` also needs).
-- Licence: MIT (LICENSE in the zip). Source and tests: https://github.com/kheirou/hn-redesign (the uploaded zip is the source).
+- Licence: MIT (LICENSE in the zip). Source and tests: https://github.com/kheirou/hacker-news-refresh (the uploaded zip is the source).
 
 ## Screenshots (docs/screenshots/, 1280x800, real Firefox, public pages)
 1. 1-front-dark-table.png: front page, dark theme, table view, control pad

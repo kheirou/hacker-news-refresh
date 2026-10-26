@@ -1,4 +1,4 @@
-# HN Redesign
+# Hacker News Refresh
 
 A Firefox extension that restyles [news.ycombinator.com](https://news.ycombinator.com): tabs and toolbar, five themes, table or list view, bookmarks, new-reply badges, selection tools, user cards and keyboard shortcuts. Free, no account, nothing leaves your browser.
 
@@ -22,7 +22,7 @@ Everything is stored in `storage.local` on your machine. The only network call i
 ## Install
 
 - From source: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, pick `src/manifest.json`.
-- Packaged: `mise run build` writes `web-ext-artifacts/hn_redesign-<version>.zip`.
+- Packaged: `mise run build` writes `web-ext-artifacts/hacker_news_refresh-<version>.zip`.
 
 Requires Firefox 142 or newer.
 

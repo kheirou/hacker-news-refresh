@@ -109,7 +109,7 @@ test.describe('backup import limits', () => {
   test('numbers are clamped to the slider limits', async ({ page }) => {
     await boot(page, '/news')
     await page.getByRole('button', { name: 'Bookmarks', exact: true }).click()
-    const backup = JSON.stringify({ app: 'hn-redesign', version: 1, bookmarks: [], settings: { size: 1e9, width: -5, line: 99 } })
+    const backup = JSON.stringify({ app: 'hacker-news-refresh', version: 1, bookmarks: [], settings: { size: 1e9, width: -5, line: 99 } })
     await page.locator('input[type=file]').setInputFiles({ name: 'b.json', mimeType: 'application/json', buffer: Buffer.from(backup) })
     await expect(page.getByRole('status')).toHaveText('Imported 0 bookmarks.')
     expect(await page.evaluate(() => ({ size: __store.size, width: __store.width, line: __store.line }))).toEqual({ size: 22, width: 600, line: 2 })

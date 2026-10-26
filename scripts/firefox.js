@@ -7,7 +7,7 @@ const path = require('node:path')
 
 const SRC = path.resolve(__dirname, '..', 'src')
 const FIREFOX = process.env.FIREFOX_BIN || 'C:/Program Files/Mozilla Firefox/firefox.exe'
-const ID = 'hn-redesign@kheirou.dev'
+const ID = 'hacker-news-refresh@kheirou.dev'
 const UUID = '5b0d4c1e-7a3f-4c2b-9d6e-1f2a3b4c5d6e' // pinned so the extension's own pages can be opened
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 

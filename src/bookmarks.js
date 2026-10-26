@@ -75,7 +75,7 @@ function cleanBookmark(b) {
 function parseBackup(text) {
   let data
   try { data = JSON.parse(text) } catch { throw new Error('That file is not valid JSON.') }
-  if (data?.app !== 'hn-redesign' || !Array.isArray(data.bookmarks)) throw new Error('That file is not an HN Redesign backup.')
+  if (data?.app !== 'hacker-news-refresh' || !Array.isArray(data.bookmarks)) throw new Error('That file is not a Hacker News Refresh backup.')
   const bookmarks = data.bookmarks.filter(validBookmark).map(cleanBookmark).slice(0, BM_MAX)
   const settings = Object.fromEntries(Object.entries(data.settings ?? {}).filter(([k, v]) =>
     k in DEFAULTS && typeof v === typeof DEFAULTS[k] && Array.isArray(v) === Array.isArray(DEFAULTS[k]) && (!Array.isArray(v) || v.every(x => typeof x === 'string'))))
@@ -85,9 +85,9 @@ function parseBackup(text) {
 
 async function exportBackup() {
   const settings = await kv.get(Object.keys(DEFAULTS))
-  const data = { app: 'hn-redesign', version: 1, exported: new Date().toISOString(), bookmarks: await loadBookmarks(), settings }
+  const data = { app: 'hacker-news-refresh', version: 1, exported: new Date().toISOString(), bookmarks: await loadBookmarks(), settings }
   const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }))
-  const a = h('a', { href: url, download: `hn-redesign-backup-${data.exported.slice(0, 10)}.json` })
+  const a = h('a', { href: url, download: `hacker-news-refresh-backup-${data.exported.slice(0, 10)}.json` })
   a.addEventListener('click', e => e.stopPropagation()) // a synthetic click must not close the open panel
   document.body.append(a)
   a.click()

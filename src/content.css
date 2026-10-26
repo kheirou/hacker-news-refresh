@@ -19,12 +19,12 @@
 :root[data-hn-theme="black"], .hn-tile[data-theme="black"] { --bg: #000; --panel: #17171a; --text: #e8e8ea; --muted: #8e8e93; --accent: #ff7a2f; --border: #26262b; }
 .hn-tile[data-theme="light"] { --bg: #fff; --panel: #fff; --text: #1c1c1e; --muted: #6e6e73; --accent: #e8590c; --border: #e5e5ea; }
 :root[data-hn-font="serif"] { --font: Georgia, "Times New Roman", serif; }
-:root[data-hn-font="inter"] { --font: "HN Redesign Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
+:root[data-hn-font="inter"] { --font: "Hacker News Refresh Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
 
 /* Inter (SIL Open Font Licence, see fonts/OFL.txt): variable weight, Latin and Latin Extended subsets, loaded only when used. */
-@font-face { font-family: "HN Redesign Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2");
+@font-face { font-family: "Hacker News Refresh Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "HN Redesign Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
+@font-face { font-family: "Hacker News Refresh Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
 /* Extension-built elements stay hidden unless the redesign is on (shown inside the nested block below). */
@@ -125,7 +125,7 @@ body > center { text-align: left; } /* HN wraps the page in <center>, which also
 .hn-seg button + button { border-left: 1px solid var(--border); }
 .hn-seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
 .hn-seg .hn-font-serif { font-family: Georgia, "Times New Roman", serif; }
-.hn-seg .hn-font-inter { font-family: "HN Redesign Inter", system-ui, sans-serif; }
+.hn-seg .hn-font-inter { font-family: "Hacker News Refresh Inter", system-ui, sans-serif; }
 
 /* Steppers: label, -, value, +, and the slider underneath. */
 .hn-step { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 6px 8px; margin: 16px 0; color: var(--muted); font-size: .9em; }

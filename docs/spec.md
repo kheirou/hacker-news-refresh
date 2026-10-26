@@ -1,4 +1,4 @@
-# Spec: HN Redesign (clean-room)
+# Spec: Hacker News Refresh (clean-room)
 
 Independent implementation: own code, name, icon and wording; no third-party extension code or assets were used.
 Firefox MV2, target host `news.ycombinator.com`.

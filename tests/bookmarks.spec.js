@@ -63,16 +63,16 @@ test.describe('bookmark buttons', () => {
 })
 
 test.describe('backup and restore', () => {
-  const backup = (bookmarks, extra = {}) => JSON.stringify({ app: 'hn-redesign', version: 1, bookmarks, settings: {}, ...extra })
+  const backup = (bookmarks, extra = {}) => JSON.stringify({ app: 'hacker-news-refresh', version: 1, bookmarks, settings: {}, ...extra })
   const story = (n, extra = {}) => ({ key: `story:${n}`, type: 'story', title: `Story ${n}`, url: `https://x.example/${n}`, t: n, ...extra })
 
   test('export downloads JSON with bookmarks and stored settings', async ({ page }) => {
     await boot(page, '/news', { settings: { theme: 'slate', bookmarks: [story(5)] } })
     await panelButton(page).click()
     const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export' }).click()])
-    expect(download.suggestedFilename()).toMatch(/^hn-redesign-backup-\d{4}-\d{2}-\d{2}\.json$/)
+    expect(download.suggestedFilename()).toMatch(/^hacker-news-refresh-backup-\d{4}-\d{2}-\d{2}\.json$/)
     const data = JSON.parse(fs.readFileSync(await download.path(), 'utf8'))
-    expect(data).toMatchObject({ app: 'hn-redesign', version: 1, bookmarks: [{ key: 'story:5' }], settings: { theme: 'slate' } })
+    expect(data).toMatchObject({ app: 'hacker-news-refresh', version: 1, bookmarks: [{ key: 'story:5' }], settings: { theme: 'slate' } })
     await expect(page.getByRole('status')).toHaveText('Backup downloaded.')
   })
 
@@ -97,7 +97,7 @@ test.describe('backup and restore', () => {
     await input.setInputFiles({ name: 'x.json', mimeType: 'application/json', buffer: Buffer.from('not json') })
     await expect(page.getByRole('status')).toHaveText('That file is not valid JSON.')
     await input.setInputFiles({ name: 'x.json', mimeType: 'application/json', buffer: Buffer.from('{"hello":1}') })
-    await expect(page.getByRole('status')).toHaveText('That file is not an HN Redesign backup.')
+    await expect(page.getByRole('status')).toHaveText('That file is not a Hacker News Refresh backup.')
     await input.setInputFiles({
       name: 'x.json', mimeType: 'application/json',
       buffer: Buffer.from(backup([story(3), story(4, { url: 'javascript:alert(1)' }), { key: 'bogus:1', type: 'bogus', title: 't', url: 'https://x.example' }], { settings: { theme: 7, evil: true, on: 'yes' } })),
